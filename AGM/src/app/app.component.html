@@ -1,0 +1,24 @@
+{{title}}
+<!--Centriamo la mappa alle nostre coordinate-->
+<google-map  [center]="center" width="100%">  
+  <!--Mettiamo un marker alle nostre coordinate-->
+  <map-marker [position]="position" >
+  </map-marker>
+  <map-marker [position]="position">
+  </map-marker>
+
+  <map-circle [center]="position"
+              [radius]="50"
+              [options] = 'circleOptions'>
+  </map-circle>
+
+  <map-marker [position]="position_casa"></map-marker>
+    <map-circle [center]="position_casa"
+              [radius]="50"
+              [options] = 'circleOptions  '>
+  </map-circle>
+</google-map>
+
+
+<button (click)="cambio_colore()">cambio colore</button>
+
