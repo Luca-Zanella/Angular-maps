@@ -1,0 +1,26 @@
+
+{
+  "type": "Mammifero",
+  "categoria": {
+    "type": "A macchie"
+  },
+  "dettagli" {
+    "sangue": "hanno sangue caldo",
+    "nascità": "vivipari",   
+    "ambienti": ["terra", "acqua","aria"]
+  }
+}
+
+{
+    "type": "Rettile",
+    "categoria":{
+        "type": "dps"
+    },
+    "dettagli"{
+        "sangue": "freddo",
+        "nascità":"depongono uova",
+        "perk":"corpo ricoperto di squame o placche rigide",
+        "ambiente":["acqua","terra"]
+    }
+    
+}
