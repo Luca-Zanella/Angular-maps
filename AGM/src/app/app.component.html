@@ -2,23 +2,31 @@
 <!--Centriamo la mappa alle nostre coordinate-->
 <google-map  [center]="center" width="100%">  
   <!--Mettiamo un marker alle nostre coordinate-->
-  <map-marker [position]="position" >
-  </map-marker>
-  <map-marker [position]="position">
-  </map-marker>
+  <map-marker [position]="position" [options]="markerOptions"></map-marker>
+  <map-marker [position]="position_casa" [options]="markerOptions_dog"></map-marker>
+  <map-marker [position]="position_campo" [options]="markerOptions_campo"></map-marker>
 
   <map-circle [center]="position"
               [radius]="50"
               [options] = 'circleOptions'>
   </map-circle>
-
-  <map-marker [position]="position_casa"></map-marker>
     <map-circle [center]="position_casa"
               [radius]="50"
               [options] = 'circleOptions  '>
   </map-circle>
+  <map-circle [center]="position_campo"
+              [radius]="50"
+              [options] ='circleOptions'>
+  </map-circle>
+
+
+  <map-polygon [paths]="vertices">
+</map-polygon>
+<map-polygon [paths]="rettangolo" [options] ='circleOptions_rettangolo'>
+</map-polygon>
 </google-map>
 
 
-<button (click)="cambio_colore()">cambio colore</button>
+<button (click)="cambio_colore()">cambio colore cerchio</button>
+<button (click)="cambio_colore_rettangolo()">cambio colore rettangolo</button>
 
