@@ -19,7 +19,7 @@ export class AppComponent {
   arr = ['yellow', 'green', 'blue'];
   arr_rettangolo = ['#CFD11A', '#CA054D', '#00AFB5'];
   i = 0;
-  circleOptions: { fillColor: string };
+  circleOptions: google.maps.CircleOptions;
   circleOptions_rettangolo: { fillColor: string };
   markerOptions: google.maps.MarkerOptions;
   markerOptions_dog: google.maps.MarkerOptions;
