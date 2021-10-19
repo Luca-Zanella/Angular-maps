@@ -1,6 +1,6 @@
 {{title}}
 <!--Centriamo la mappa alle nostre coordinate-->
-<google-map  [center]="center" width="100%">  
+<google-map  [center]="center" width="100%" >  
   <!--Mettiamo un marker alle nostre coordinate-->
   <map-marker [position]="position" [options]="markerOptions"></map-marker>
   <map-marker [position]="position_casa" [options]="markerOptions_dog"></map-marker>
@@ -12,7 +12,8 @@
   </map-circle>
     <map-circle [center]="position_casa"
               [radius]="50"
-              [options] = 'circleOptions  '>
+              [options] = 'circleOptions  
+              '>
   </map-circle>
   <map-circle [center]="position_campo"
               [radius]="50"

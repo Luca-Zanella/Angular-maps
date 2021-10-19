@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   title = 'server mappe';
   //Aggiungiamo latitudine e longitudine di un luogo
+  gg:any;
   center: any;
   center_casa: any;
   center_campo: any;
@@ -19,7 +21,7 @@ export class AppComponent {
   arr = ['yellow', 'green', 'blue'];
   arr_rettangolo = ['#CFD11A', '#CA054D', '#00AFB5'];
   i = 0;
-  circleOptions: { fillColor: string };
+  circleOptions: google.maps.CircleOptions;
   circleOptions_rettangolo: { fillColor: string };
   markerOptions: google.maps.MarkerOptions;
   markerOptions_dog: google.maps.MarkerOptions;
@@ -29,7 +31,17 @@ export class AppComponent {
   //circleOptions_casa: { fillColor: string };
 
   constructor() {
-    this.circleOptions = { fillColor: this.scelta_colore };
+    this.circleOptions = {
+      fillColor: this.scelta_colore,
+      draggable: true,
+      editable: true,
+      
+     
+      
+    };
+
+
+    
     //this.circleOptions_casa = { fillColor: 'yellow' };
     this.center = { lat: 45.506738, lng: 9.190766 };
     this.center_casa = { lat: 45.49855918846185, lng: 9.174326997465279 };
@@ -77,6 +89,9 @@ export class AppComponent {
     this.circleOptions = { fillColor: 'yellow' };
   }
   */
+  
+ 
+
   cambio_colore() {
     this.circleOptions = { fillColor: this.arr[this.i] };
     if (this.i < this.arr.length) {
