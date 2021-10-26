@@ -7,17 +7,19 @@
   <map-marker [position]="position_campo" [options]="markerOptions_campo"></map-marker>
 
   <map-circle [center]="position"
+              (radiusChanged) = "radiusChanged('first')"
               [radius]="50"
-              [options] = 'circleOptions'>
+              [options] = circleOptions #firstCircle>
   </map-circle>
     <map-circle [center]="position_casa"
               [radius]="50"
-              [options] = 'circleOptions  
-              '>
+              (radiusChanged) = "radiusChanged('second')"
+              [options] = circleOptions #secondCircle>
   </map-circle>
   <map-circle [center]="position_campo"
               [radius]="50"
-              [options] ='circleOptions'>
+              (radiusChanged) = "radiusChanged('third')"
+              [options] = circleOptions #thirdCircle>
   </map-circle>
 
 

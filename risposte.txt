@@ -1,0 +1,149 @@
+01)
+   1)  A quale località fanno riferimento latitudine e longitudine?
+    -  lat e lon fanno riferimento alla città di milano
+
+    2) Sei in grado di aggiungere un altro marker che indica casa tua?
+    -  si sono in grado di farlo naturlamente cambiando i nomi
+       constructor()
+  {
+    this.center={lat: 45.32784372, lng: 9.23178293923};
+    this.position = this.center;
+    this.label = "ciao";
+  }
+  <google-map [center]="center">  
+  <!--Mettiamo un marker alle nostre coordinate-->
+  <map-marker [position]="position" [label]="label" [title]="title">
+  </map-marker>
+</google-map>
+
+    3) Come si aggiunge la libreria google-maps al progetto?
+    -  npm install @angular/google-maps poi in alcuni casi bisogna fixare tutto angular per problemi di versione.
+
+    4) Come si fornisce la chiave di google maps alla libreria?
+       -nell'index.html si aggiunge <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM339h_Zs0MjGKJr9zMUvKBoBuzuqRCOc"></script> con la propria chiave
+
+    5) Qual è il tag che visualizza la mappa?
+        - <google-map  [center]="center" width="100%" ></google-map> poi si può modificare come si vuole.
+
+    6) Come si centra la mappa rispetto a latitudine e longitudine?
+        -mettendo center come attiributo al nostro tag che andiamo a riprendere nel ts
+
+    7) Come si aggiunge un marker?
+        -<map-marker [position]="position" [options]="markerOptions"></map-marker> poi si ppuò modificare come si vuole.
+
+
+01.1) 
+    
+    #Qual è il tag che ti permette di visualizzare un cerchio?
+    -<map-circle [center]="position"
+              (radiusChanged) = "radiusChanged('first')"
+              [radius]="50"
+              [options] = circleOptions #firstCircle>
+  </map-circle> poi si può modificare come si vuole.
+
+  #Quali parametri vengono passati al tag per il cerchio?
+    -center,radius,options
+
+    center -> il centro del nostro cerchio.
+    radius -> il raggio del cerchio che vogliamo fare
+    options -> le opzione del cercio come il colore
+
+    #Qual è il tag che ti permette di visualizzare un marker?
+     <map-marker [position]="position" 
+              [label]="label" 
+              [title]="title"
+              [options] = "markerOptions">
+    </map-marker>
+    #Quali parametri vengono passati al marker in questo esercizio? Cosa rappresenta ciascun parametro?
+            position, label, title, options:
+            position -> posizione del marker
+            label -> cosa c'è scritto dentro il marker
+            titlolo del marker 
+            options -> opzione del marker come ad esempio l'icona.
+
+    #Quali attributi sono indicati nell’oggetto iconData?
+    url,scaledsize
+
+    #Qual è il tag che ti permette di visualizzare un poligono?
+      <map-polygon [paths]="vertices">
+    </map-polygon>
+
+    #Quali parametri vengono passati al poligono in questo esercizio? Cosa rappresenta ciascun parametro?
+    path -> che rappresenta ad esempio i vari punti in questo caso 3 perhchè triangolo, che poi si uniscono.
+
+02.1) 
+
+    #come si rappresenta un oggetto geojson
+           mettendo le proprietà type, geometry e properties
+           All’interno della proprietà geometry c’è un oggetto che a sua volta ha le proprietà type e coordinates (un vettore)
+
+    #Come si rappresenta un vettore? -> []
+
+    #Come si rappresenta un oggetto che contiene un vettore? {coordinates: [ecc]} 
+
+    #Descrivi il tipo coordinate LineString (lo trovi nella tabella qui sopra) come ho fatto io per Polygon
+    -praticamente si inseriscono i punti dentro l'array e dato che è di tipo linestring si uniscono senza ripempire come fa il poligono.
+
+
+
+02.2) 
+
+    #Cosa puoi scrivere nella proprietà type della classe Geometry? (controlla la precedente lezione)
+    -Point, linestring, polygon.
+    #Cosa puoi scrivere nella proprietà coordinates della classe Geometry?
+    -Le coordinate della figura ad esmepio dentro un array.
+    #Cosa puoi scrivere nella proprietà type della classe GeoJson? 
+    -Feature
+    #Cosa contiene il campo geometry della classe GeoJson?
+    -contiene i punti in base all'array ed il tipo cambia forma.
+    #Cosa può contenere la proprietà properties
+    -può conenere proprietà ad esempio il nome.
+    #Perchè coordinates è di tipo any?
+    -non sappiamo se coordinates sarà un number[] (Point), number[][] (LineString) o    
+    number [][][] (Polygon) allora usiamo il tipo any: indefinito
+
+
+    #Cosa contiene il file geojson.model.ts?
+    -contiente il formato geojson delle coordiante e dei poligoni che vogliamo inserire.
+    #Cosa contiene la costante GEOJSON?
+    -contiene il geojsonobject.
+
+    #A cosa serve il decoratore @ViewChild?
+    -In pratica ci permette di usare la libreria javascript in angular
+    #Come faccio ad ottenerlo?
+    -metto l'id al tag e lo vado a riprendere dentro la view child per utilizzare l alibreria js.
+    #A cosa serve il parametro zoom del componente <google-map>
+    -Per dire in apertura quanto zoommare sul punto che vogliamo vedere.
+
+
+    #spiega le seguenti righe di codice
+    --assegno una variabile che sarà poi il colore del poligono
+    let newColor = "#FF0000"; //RED
+    --dato che nel geojson ci sono più poligono vengono caratterizzati da un id e dice che se l'id è 0 allora avrà un colore se è 1 ne avrà un altro con l'else.
+    if(feature.i.id == 0) newColor = "#00FF00"; //GREEN
+    else newColor = "#0000FF"; //BLUE
+    return ({
+    --non si può cliccare 
+      clickable: false,
+      --metti il colore che desideri in base alla condizione
+      fillColor: newColor,
+      --spessore
+      strokeWeight: 1
+    });
+
+
+    #Nell’esercizio viene riempito il vettore di marker creando un marker alla volta, questo sarebbe un problema nel caso avessimo molti marker sapresti farlo con un ciclo for o for-of?
+    for (let feature of  this.geoJsonObject.features)
+    {
+         {
+        position: {
+          lng: feature.geometry.coordinates[0][0][0],
+          lat: feature.geometry.coordinates[0][0][1],
+        },
+        label: String(feature.properties.id),
+      },    
+    }
+
+
+
+

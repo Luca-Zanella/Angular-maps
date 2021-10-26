@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ConsoleReporter } from 'jasmine';
+import { Component, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
+import { MapCircle } from '@angular/google-maps';
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { ConsoleReporter } from 'jasmine';
 export class AppComponent {
   title = 'server mappe';
   //Aggiungiamo latitudine e longitudine di un luogo
-  gg:any;
+  gg: any;
   center: any;
   center_casa: any;
   center_campo: any;
@@ -35,13 +36,8 @@ export class AppComponent {
       fillColor: this.scelta_colore,
       draggable: true,
       editable: true,
-      
-     
-      
     };
 
-
-    
     //this.circleOptions_casa = { fillColor: 'yellow' };
     this.center = { lat: 45.506738, lng: 9.190766 };
     this.center_casa = { lat: 45.49855918846185, lng: 9.174326997465279 };
@@ -89,8 +85,6 @@ export class AppComponent {
     this.circleOptions = { fillColor: 'yellow' };
   }
   */
-  
- 
 
   cambio_colore() {
     this.circleOptions = { fillColor: this.arr[this.i] };
@@ -108,4 +102,33 @@ export class AppComponent {
       this.i = 0;
     }
   }
+
+  //@ViewChild(MapCircle) circle: MapCircle; //<- This only get the first instance
+
+  @ViewChild('firstCircle') firstCircle!: MapCircle;
+  @ViewChild('secondCircle') secondCircle!: MapCircle;
+  @ViewChild('thirdCircle') thirdCircle!: MapCircle;
+  radiusChanged(type: string) {
+    switch (type) {
+      case 'first':
+        if (this.firstCircle) {
+          console.log(this.firstCircle.getRadius());
+        }
+        break;
+      case 'second':
+        if (this.secondCircle) {
+          console.log(this.secondCircle.getRadius());
+        }
+        break;
+      case 'third':
+        if (this.thirdCircle) {
+          console.log(this.thirdCircle.getRadius());
+        }
+        break;
+    }
+  }
+}
+
+function ngAfterViewInit() {
+  throw new Error('Function not implemented.');
 }
